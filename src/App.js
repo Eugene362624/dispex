@@ -77,7 +77,7 @@ function App() {
 
   const addClientHandler = () => {
     let newUser = prompt('Добавить нового пользователя', "Введите имя, телефон, почту через запятую как в примере")
-    newUser = newUser.split(',')
+    newUser ? newUser = newUser.split(',') : ''
     console.log(newUser)
     if (newUser.length == 3) {
       axios.post(baseUrl + ` /HousingStock/client`, {
