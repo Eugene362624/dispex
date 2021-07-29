@@ -1,0 +1,1 @@
+export const baseUrl = 'https://dispex.org/api/vtest'
