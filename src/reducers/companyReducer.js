@@ -12,12 +12,14 @@ export function getCompaniesReducer(state = {MC:[{}]}, action) {
     }
 }
 
-export function getCompanyReducer(state = {data: []}, action) {
+export function getCompanyReducer(state = {companyStreets: []}, action) {
     switch(action.type) {
         case COMPANY_CLIENTS_REQUEST: 
             return {companyLoading: true}
         case COMPANY_CLIENTS_SUCCESS: 
-            return {companyLoading: false, data: action.payload, selectedCompany: action.selectedCompany}
+            let streets = []
+            action.payload.map((e, i) => !streets.some(el => el.name == e.streetName) ? streets.push({name: e.streetName, id: e.streetId}) : '')
+            return {companyLoading: false, companyStreets: streets, selectedCompany: action.selectedCompany}
         case COMPANY_CLIENTS_FAIL: 
             return {companyLoading: false, companyError: action.error}
         default: return state
